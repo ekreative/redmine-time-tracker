@@ -9,3 +9,8 @@ api:
     resource: "@RedmineAppBundle/Controller/Api/"
     type:     annotation
     prefix:   "api"
+
+login_check:
+    path: /login_check
+logout:
+    path: /logout

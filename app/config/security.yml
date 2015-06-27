@@ -8,6 +8,30 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt|error)|css|images|js)/
             security: false
-
-        main:
+        login:
+            pattern: ^/api/user/(login|register|forgot)$
+            security: false
+            anonymous: true
+        api_area:
+            pattern: ^/api
+            stateless: true
+            simple_preauth:
+                authenticator: redmine.api.security.apikeyauthenticator
+            anonymous: false
+        secured_area:
+            pattern: ^/
             anonymous: ~
+            simple_form:
+                authenticator: redmine.form.authenticator
+                check_path:    login_check
+                login_path:    login
+                default_target_path: admin_apps_list
+                username_parameter: login_form[username]
+                password_parameter: login_form[password]
+            logout:
+                path: /logout
+                target: /
+
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin, roles: [ROLE_USER] }

@@ -1,1 +1,12 @@
 services:
+    redmine.form.authenticator:
+        class: Redmine\AppBundle\Security\RedmineAuthenticator
+        arguments: ["@security.password_encoder"]
+
+    redmine.api.security.apikeyuserprovider:
+        class: Redmine\AppBundle\Security\ApiKeyUserProvider
+        arguments: [ @doctrine.orm.entity_manager ]
+
+    redmine.api.security.apikeyauthenticator:
+        class: Redmine\AppBundle\Security\ApiKeyAuthenticator
+        arguments: [ @redmine.api.security.apikeyuserprovider ]

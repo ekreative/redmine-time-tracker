@@ -11,7 +11,7 @@
 <body>
 
 {% block menu %}
-    {#{% if app.user and is_granted('ROLE_ADMIN') %}#}
+    {% if app.user and is_granted('ROLE_USER') %}
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -51,7 +51,7 @@
                 </div> {# end navbar collapse#}
             </div>  {# end container#}
         </nav>
-    {#{% endif %}#}
+    {% endif %}
 {% endblock menu %}
 
 <div class="container">

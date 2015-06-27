@@ -1,0 +1,35 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-3 col-md-offset-5 col-lg-3 col-lg-offset-5 col-sm-6 col-sm-offset-3">
+            <div class="login-form text-center" style="margin-top: 200px;">
+                {{ form_start(form, { 'attr': {'id': 'login_form'} }) }}
+
+                {% if error %}
+                    <div class="alert alert-danger fade in">
+                        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ error.message }}
+                    </div>
+                {% endif %}
+
+                <h3>Login form </h3>
+                {#{{ form_label(form.username) }}#}
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                    {{ form_widget(form.username, {'attr': {'placeholder': 'Redmine username', 'class': 'form-control' } } ) }}
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                    {{ form_widget(form.password, {'attr': {'placeholder': 'Redmine password', 'class': 'form-control'} } ) }}
+                </div>
+                <br>
+                <button type="submit" class="btn btn-default"><i class="fa fa-sign-in"></i>&nbsp;&nbsp;Sign in</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
