@@ -25,7 +25,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/admin/", name="default")
+     * @Route("/admin", name="default")
      */
     public function defaultAction()
     {

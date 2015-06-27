@@ -8,13 +8,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {
-
     /**
      * @Route("/", name="admin_user_home")
      * @Template()
      */
     public function userDefaultAction()
     {
-        return [];
+        $z = 'd';
+        return [
+            'q' => 'dsa'
+        ];
     }
 }

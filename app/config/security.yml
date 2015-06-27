@@ -1,8 +1,14 @@
 security:
 
+    encoders:
+        Redmine\AppBundle\Entity\RedmineUser:
+            algorithm: bcrypt
+            cost: 12
+
     providers:
-        in_memory:
-            memory: ~
+        dashboard:
+            entity: {class: Redmine\AppBundle\Entity\RedmineUser, property: username }
+#            id: redmine.userprovider
 
     firewalls:
         dev:
@@ -23,9 +29,10 @@ security:
             anonymous: ~
             simple_form:
                 authenticator: redmine.form.authenticator
+                provider: dashboard
                 check_path:    login_check
                 login_path:    login
-                default_target_path: admin_apps_list
+                default_target_path: admin_user_home
                 username_parameter: login_form[username]
                 password_parameter: login_form[password]
             logout:
