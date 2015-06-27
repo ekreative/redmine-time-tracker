@@ -1,0 +1,113 @@
+@nav-color: rgba(248, 248, 248, 0.9);
+
+body
+{
+  padding-top: 60px;
+}
+.navbar-default
+{
+  background-color: @nav-color;
+  background-image: none;
+}
+.navbar-default .navbar-nav>.open>a,
+.navbar-default .navbar-nav>.active>a
+{
+  background-color: rgba(231, 231, 231, 0.9);
+  background-image: none;
+}
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus,
+.navbar-default .navbar-nav>a:hover,
+.navbar-default .navbar-nav>.open>a:hover
+{
+  background-color: rgba(231, 231, 231, 0.9);
+  background-image: none;
+}
+.app-container
+{
+  width: 100%;
+  height: 100%;
+  border: solid 1px #000000;
+  border-radius: 10px;
+  display: block;
+  min-height: 150px;
+  position: relative;
+  padding: 15px;
+  text-align: center;
+}
+.app-content {
+  width: 250px;
+  height: 150px;
+  display: table-cell;
+  vertical-align: middle;
+}
+.app-dropdown-act {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+.app-dropdown-act button,
+.app-dropdown-act button:hover
+{
+  border-radius: 30px;
+  background-image: none;
+  background-color: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+.filter-form select,
+.filter-form input[type='text'] {
+  display: inline-block;
+  width: auto;
+}
+.breadcrumb {
+  margin-bottom: 0;
+}
+#breadcrumb_custom {
+  margin: 0;
+  padding: 0;
+}
+.apps-custom-view input[type='checkbox'] {
+  margin-right: 5px;
+}
+.apps-custom-view input[type='checkbox'] + label {
+  margin-right: 25px;
+}
+.alert {
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+.no-margin {
+  margin: 5px 0;
+}
+.vert-align {
+  vertical-align: middle !important;
+}
+.reset-pswd {
+  margin-bottom: 10px;
+}
+.error-handling {
+  ul {
+    padding-left: 0;
+
+    li {
+      list-style: none;
+      color: red;
+      font-weight: bolder;
+    }
+  }
+}
+.csv-info {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 7px;
+}
+.csv-status-pending {
+  background-color: #f0cd3c;
+}
+.csv-status-loaded {
+  background-color: #18e538;
+}
+.csv-status-fail {
+  background-color: #f45812;
+}
