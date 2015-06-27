@@ -1,3 +1,11 @@
-app:
-    resource: "@AppBundle/Controller/"
+redmine_app:
+    resource: "@RedmineAppBundle/Controller/"
     type:     annotation
+dashboard:
+    resource: "@RedmineAppBundle/Controller/Dashboard/"
+    type:     annotation
+    prefix:   "admin"
+api:
+    resource: "@RedmineAppBundle/Controller/Api/"
+    type:     annotation
+    prefix:   "api"
