@@ -17,3 +17,15 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
+    redmine:    'url'
+    aws_key: aws_key
+    aws_secret: aws_secret
+    aws_region: aws_region
+    aws_ios_arn: aws_arn_ios
+    aws_ios_sb_arn: aws_arn_ios_sb
+    aws_android_arn: aws_arn_android
+    queue_name: redmine_tracker
+    alfa_sms_name: 'CTO service'
+    alfa_sms_ID: "tel"
+    alfa_sms_password: "pas"
+    alfa_sms_api_key: "api_id"

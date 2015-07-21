@@ -19,6 +19,10 @@ class AppKernel extends Kernel
 
             new Redmine\AppBundle\RedmineAppBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new Mcfedr\JsonFormBundle\McfedrJsonFormBundle(),
+            new Mcfedr\AwsPushBundle\McfedrAwsPushBundle(),
+            new Mcfedr\ResqueBundle\McfedrResqueBundle(),
+            new Nelmio\CorsBundle\NelmioCorsBundle(),
 
         );
 

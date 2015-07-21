@@ -2,12 +2,15 @@
 
 namespace Redmine\AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\Role\Role;
 use Symfony\Component\Security\Core\User\UserInterface;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
+
 /**
  * Class BaseUser
  *
@@ -82,10 +85,16 @@ class RedmineUser implements UserInterface
      */
     protected $plainPassword;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Redmine\AppBundle\Entity\Device", mappedBy="user", cascade={"persist"})
+     */
+    protected $devices;
+
     public function __construct()
     {
         $this->setSalt(md5(uniqid()));
         $this->setRoles('ROLE_USER');
+        $this->devices = new ArrayCollection();
     }
 
     /**
@@ -313,5 +322,33 @@ class RedmineUser implements UserInterface
         $this->surname = $surname;
 
        return $this;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getDevices()
+    {
+        return $this->devices;
+    }
+
+    /**
+     * @param Device $device
+     * @return RedmineUser
+     */
+    public function addDevice(Device $device)
+    {
+        $device->setUser($this);
+        $this->devices->add($device);
+
+        return $this;
+    }
+
+    /**
+     * @param Device $device
+     */
+    public function removeDevice(Device $device)
+    {
+        $this->devices->removeElement($device);
     }
 }

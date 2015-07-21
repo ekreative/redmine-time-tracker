@@ -21,7 +21,12 @@
         "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
         "incenteev/composer-parameter-handler": "~2.0",
         "guzzlehttp/guzzle": "^6.0",
-        "stof/doctrine-extensions-bundle": "^1.1"
+        "stof/doctrine-extensions-bundle": "^1.1",
+        "mcfedr/json-form": "^3.0",
+        "mcfedr/awspushbundle": "^5.1",
+        "mcfedr/resque-bundle": "^3.0",
+        "nesbot/carbon": "^1.20",
+        "nelmio/cors-bundle": "^1.4"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
