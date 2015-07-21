@@ -55,6 +55,17 @@ class Device
     protected $user;
 
     /**
+     * @return array
+     */
+    public function toLog()
+    {
+        return [
+            "deviceId" => $this->getId(),
+            "deviceArn" => $this->getArn()
+        ];
+    }
+
+    /**
      * Set deviceId
      *
      * @param string $deviceId

@@ -18,3 +18,7 @@ services:
     redmine.guzzle_client:
         class: Redmine\AppBundle\RedmineAPIHelper\GuzzleClient
         arguments: ['%redmine%']
+
+    redmine.device.notification:
+        class: Redmine\AppBundle\Notification\DeviceAndPushNotification
+        arguments: [ @logger, @mcfedr_aws_push.messages, @mcfedr_aws_push.devices, @doctrine.orm.entity_manager, @mcfedr_aws_push.sns_client ]

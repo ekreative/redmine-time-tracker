@@ -39,7 +39,6 @@ class LoginController extends JsonController
                 'redmineUserID' => $q->user->id
             ]);
             if (!$user) {
-
                 $user = new RedmineUser();
                 $user
                     ->setUsername($q->user->login)
@@ -58,6 +57,8 @@ class LoginController extends JsonController
         } catch (\Exception $e) {
             return new JsonResponse(['message' => 'Redmine user: bad credentials'], 403);
         }
+
+        $this->get('redmine.device.notification')->getDevice($user, $userDTO->getDeviceId(), $userDTO->getPushToken(), $userDTO->getPushPlatform());
 
         return new JsonResponse($user);
     }
