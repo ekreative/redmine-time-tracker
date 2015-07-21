@@ -17,3 +17,4 @@ services:
 
     redmine.guzzle_client:
         class: Redmine\AppBundle\RedmineAPIHelper\GuzzleClient
+        arguments: ['%redmine%']

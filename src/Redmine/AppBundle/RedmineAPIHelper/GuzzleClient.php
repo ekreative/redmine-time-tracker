@@ -6,13 +6,18 @@ use GuzzleHttp\Client;
 
 class GuzzleClient 
 {
-    const REDMINE_BASE_URL = "https://redmine.ekreative.com/";
+    protected $redmine_base_url;
+
+    public function __construct($redmine_url)
+    {
+        $this->redmine_base_url = $redmine_url;
+    }
 
     public function redmineLogin($username, $password)
     {
         $client = new Client();
 
-        $guzzleResponse = $client->get(self::REDMINE_BASE_URL . 'users/current.json', [
+        $guzzleResponse = $client->get($this->redmine_base_url . '/users/current.json', [
             'auth' => [$username, $password]
         ]);
 

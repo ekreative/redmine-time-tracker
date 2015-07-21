@@ -14,8 +14,12 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt|error)|css|images|js)/
             security: false
-        login:
-            pattern: ^/api/user/(login|register|forgot)$
+#        login:
+#            pattern: ^/api/user/(login|register|forgot)$
+#            security: false
+#            anonymous: true
+        api_login:
+            pattern: ^/api/login
             security: false
             anonymous: true
         api_area:

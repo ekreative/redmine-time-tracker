@@ -17,7 +17,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="users")
  * @ORM\Entity(repositoryClass="Redmine\AppBundle\Entity\Repository\RedmineUserRepository")
  */
-class RedmineUser implements UserInterface
+class RedmineUser implements UserInterface, \JsonSerializable
 {
     use CreateUpdateTrait;
 
@@ -95,6 +95,24 @@ class RedmineUser implements UserInterface
         $this->setSalt(md5(uniqid()));
         $this->setRoles('ROLE_USER');
         $this->devices = new ArrayCollection();
+    }
+
+    /**
+     * (PHP 5 &gt;= 5.4.0)<br/>
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     */
+    function jsonSerialize()
+    {
+        return [
+            "redmine.username" => $this->getUsername(),
+            "redmine.email" => $this->getEmail(),
+            "redmine.name" => $this->getName(),
+            "redmine.surname" => $this->getSurname(),
+            "redmine.token" => $this->getRedmineToken()
+        ];
     }
 
     /**
