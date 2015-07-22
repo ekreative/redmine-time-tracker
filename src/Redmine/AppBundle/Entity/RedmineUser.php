@@ -6,7 +6,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\Role\Role;
 use Symfony\Component\Security\Core\User\UserInterface;
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -89,6 +88,11 @@ class RedmineUser implements UserInterface, \JsonSerializable
      * @ORM\OneToMany(targetEntity="Redmine\AppBundle\Entity\Device", mappedBy="user", cascade={"persist"})
      */
     protected $devices;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Redmine\AppBundle\Entity\Settings", mappedBy="user", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    protected $settings;
 
     public function __construct()
     {
@@ -368,5 +372,24 @@ class RedmineUser implements UserInterface, \JsonSerializable
     public function removeDevice(Device $device)
     {
         $this->devices->removeElement($device);
+    }
+
+    /**
+     * @return Settings
+     */
+    public function getSettings()
+    {
+        return $this->settings;
+    }
+
+    /**
+     * @param Settings $settings
+     * @return RedmineUser
+     */
+    public function setSettings(Settings $settings)
+    {
+        $this->settings = $settings;
+
+       return $this;
     }
 }

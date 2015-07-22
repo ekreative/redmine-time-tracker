@@ -2,8 +2,10 @@
 
 namespace Redmine\AppBundle\Security;
 
+use Carbon\Carbon;
 use Doctrine\ORM\EntityManager;
 use Redmine\AppBundle\Entity\RedmineUser;
+use Redmine\AppBundle\Entity\Settings;
 use Redmine\AppBundle\RedmineAPIHelper\GuzzleClient;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -48,14 +50,22 @@ class RedmineUserProvider implements UserProviderInterface
                 $user
                     ->setUsername($q->user->login)
                     ->setEmail($q->user->mail)
+                    ->setPassword($this->encoder->encodePassword($user, "redmine"))
                     ->setName($q->user->firstname)
                     ->setSurname($q->user->lastname)
                     ->setRedmineUserID($q->user->id)
                     ->setRedmineToken($q->user->api_key);
 
+                $settings = new Settings();
+                $settings
+                    ->setSms(false)
+                    ->setPush(false)
+                    ->setNone(true)
+                    ->setCheckFirst(Carbon::now())
+                    ->setUser($user);
+
                 $this->em->persist($user);
-                $password = $this->encoder->encodePassword($user, "redmine");
-                $user->setPassword($password);
+                $this->em->persist($settings);
 
                 $this->em->flush();
 
