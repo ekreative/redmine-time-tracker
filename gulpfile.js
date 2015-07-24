@@ -41,7 +41,7 @@ gulp.task('vendors-js', function() {
 });
 
 gulp.task('custom-js', function() {
-    gulp.src('web/js/**/*.js')
+    gulp.src('web_src/js/**/*.js')
         .pipe(concat('app.min.js'))
         .pipe(minifyJs())
         .pipe(rename("custom.min.js"))

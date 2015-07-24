@@ -60,8 +60,9 @@ class RedmineUserProvider implements UserProviderInterface
                 $settings
                     ->setSms(false)
                     ->setPush(false)
-                    ->setNone(true)
-                    ->setCheckFirst(Carbon::now())
+                    ->setCheckFirst(Carbon::createFromTime(17, 45))
+                    ->setCheckSecond(Carbon::createFromTime(20, 0))
+                    ->setCheckThird(Carbon::createFromTime(9, 30))
                     ->setUser($user);
 
                 $this->em->persist($user);

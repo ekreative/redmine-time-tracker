@@ -1,0 +1,45 @@
+<?php
+
+namespace Redmine\AppBundle\Controller\Dashboard;
+
+use Doctrine\ORM\EntityManager;
+use Redmine\AppBundle\Entity\RedmineUser;
+use Redmine\AppBundle\Form\SettingsType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+
+class SettingsController extends Controller
+{
+    /**
+     * @Route("/settings", name="user_settings")
+     * @Method({"GET", "POST"})
+     * @Template()
+     */
+    public function settingsAction(Request $request)
+    {
+        /** @var RedmineUser $user */
+        $user = $this->getUser();
+        $settings = $user->getSettings();
+
+        $form = $this->createForm(new SettingsType(), $settings);
+
+        if ($request->getMethod() == "POST") {
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+
+                /** @var EntityManager $em */
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
+            }
+        }
+
+        return [
+            'form' => $form->createView(),
+            'phone' => $settings->getPhone()
+        ];
+    }
+
+}

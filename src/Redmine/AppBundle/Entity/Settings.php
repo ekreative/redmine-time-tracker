@@ -3,6 +3,7 @@
 namespace Redmine\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Settings
@@ -25,21 +26,19 @@ class Settings
     protected $push;
 
     /**
-     * @ORM\Column(name="none_", type="boolean")
-     */
-    protected $none;
-
-    /**
+     * @Assert\NotBlank(message="Обов'язкове поле")
      * @ORM\Column(name="checkFirst", type="time", nullable=true)
      */
     protected $checkFirst;
 
     /**
+     * @Assert\NotBlank(message="Обов'язкове поле")
      * @ORM\Column(name="checkSecond", type="time", nullable=true)
      */
     protected $checkSecond;
 
     /**
+     * @Assert\NotBlank(message="Обов'язкове поле")
      * @ORM\Column(name="checkThird", type="time", nullable=true)
      */
     protected $checkThird;
@@ -48,6 +47,12 @@ class Settings
      * @ORM\OneToOne(targetEntity="Redmine\AppBundle\Entity\RedmineUser", inversedBy="settings")
      */
     protected $user;
+
+    /**
+     * @Assert\Length(max=20, maxMessage="Не більше {{ limit }} символів")
+     * @ORM\Column(name="phone", type="string", length=21, nullable=true)
+     */
+    protected $phone;
 
     /**
      * Set sms
@@ -96,29 +101,6 @@ class Settings
     }
 
     /**
-     * Set none
-     *
-     * @param boolean $none
-     * @return Settings
-     */
-    public function setNone($none)
-    {
-        $this->none = $none;
-
-        return $this;
-    }
-
-    /**
-     * Get none
-     *
-     * @return boolean 
-     */
-    public function isNone()
-    {
-        return $this->none;
-    }
-
-    /**
      * Set user
      *
      * @param RedmineUser $user
@@ -139,36 +121,6 @@ class Settings
     public function getUser()
     {
         return $this->user;
-    }
-
-    /**
-     * Get sms
-     *
-     * @return boolean 
-     */
-    public function getSms()
-    {
-        return $this->sms;
-    }
-
-    /**
-     * Get push
-     *
-     * @return boolean 
-     */
-    public function getPush()
-    {
-        return $this->push;
-    }
-
-    /**
-     * Get none
-     *
-     * @return boolean 
-     */
-    public function getNone()
-    {
-        return $this->none;
     }
 
     /**
@@ -238,5 +190,26 @@ class Settings
     public function getCheckThird()
     {
         return $this->checkThird;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * @param mixed $phone
+     * @return Settings
+     */
+    public function setPhone($phone)
+    {
+        $tmp = str_replace(' ', '', str_replace('-', '', str_replace(')','', str_replace('(','', trim($phone)))));
+
+        $this->phone = $phone ? $tmp : null;
+
+        return $this;
     }
 }

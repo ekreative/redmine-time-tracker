@@ -2,6 +2,7 @@
 
 namespace Redmine\AppBundle\Controller\Api;
 
+use Carbon\Carbon;
 use Doctrine\ORM\EntityManager;
 use Mcfedr\JsonFormBundle\Controller\JsonController;
 use Redmine\AppBundle\Entity\DTO\ApiUserLogin;
@@ -55,7 +56,9 @@ class LoginController extends JsonController
                 $settings
                     ->setSms(false)
                     ->setPush(false)
-                    ->setNone(true)
+                    ->setCheckFirst(Carbon::createFromTime(17, 45))
+                    ->setCheckSecond(Carbon::createFromTime(20, 0))
+                    ->setCheckThird(Carbon::createFromTime(9, 30))
                     ->setUser($user);
 
                 $em->persist($user);

@@ -70,6 +70,11 @@ class RedmineUser implements UserInterface, \JsonSerializable
     protected $password;
 
     /**
+     * @ORM\Column(name="jobDescription", type="object", nullable=true)
+     */
+    protected $jobDescription;
+
+    /**
      * @ORM\Column(name="redmineUserId", type="integer", nullable=true)
      */
     protected $redmineUserID;
@@ -389,6 +394,25 @@ class RedmineUser implements UserInterface, \JsonSerializable
     public function setSettings(Settings $settings)
     {
         $this->settings = $settings;
+
+       return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getJobDescription()
+    {
+        return $this->jobDescription;
+    }
+
+    /**
+     * @param mixed $jobDescription
+     * @return RedmineUser
+     */
+    public function setJobDescription($jobDescription)
+    {
+        $this->jobDescription = $jobDescription;
 
        return $this;
     }
