@@ -36,7 +36,7 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, Authentica
      */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-        return new JsonResponse(['Sorry, unrecognized email or password'], 403);
+        return new JsonResponse(['Sorry, unrecognized username or password'], 403);
     }
 
     public function authenticateToken(TokenInterface $token, UserProviderInterface $userProvider, $providerKey)

@@ -30,7 +30,7 @@ status 403.
 
 ```json
 {
-    "message": "Sorry, unrecognized email or password"
+    "message": "Sorry, unrecognized username or password"
 }
 ```
 
