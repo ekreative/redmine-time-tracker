@@ -3,33 +3,70 @@
 {% block body %}
 
     {{ form_start(form, { 'attr': {'class': 'form-horizontal', 'novalidate': 'novalidate'} }) }}
+
     <div class="form-group">
-        {{ form_row(form.sms) }}
-    </div>
-    <div class="form-group">
-        {{ form_row(form.push) }}
-    </div>
-    <div class="form-group">
-        {{ form_row(form.checkFirst) }}
-    </div>
-    <div class="form-group">
-        {{ form_row(form.checkSecond) }}
-    </div>
-    <div class="form-group">
-        {{ form_row(form.checkThird) }}
-    </div>
-    <div class="form-group">
-        {{ form_row(form.phone) }}
+        <div class="col-sm-offset-4 col-sm-8">
+            <div class="checkbox">
+                <label>
+                    {{ form_widget(form.sms) }}
+                    {{ form_label(form.sms) }}
+                    {{ form_errors(form.sms) }}
+                </label>
+            </div>
+        </div>
     </div>
 
-    <button type="submit">Done</button>
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+            <div class="checkbox">
+                <label>
+                    {{ form_widget(form.push) }}
+                    {{ form_label(form.push) }}
+                    {{ form_errors(form.push) }}
+                </label>
+            </div>
+        </div>
+    </div>
 
+    <div class="form-group">
+        {{ form_label(form.checkFirst) }}
+        <div class="col-sm-8 error-handling">
+            {{ form_widget(form.checkFirst) }}
+            {{ form_errors(form.checkFirst) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.checkSecond) }}
+        <div class="col-sm-8 error-handling">
+            {{ form_widget(form.checkSecond) }}
+            {{ form_errors(form.checkSecond) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.checkThird) }}
+        <div class="col-sm-8 error-handling">
+            {{ form_widget(form.checkThird) }}
+            {{ form_errors(form.checkThird) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.phone) }}
+        <div class="col-sm-8 error-handling">
+            <div class="input-group">
+                <div class="input-group-addon">+ 38</div>
+                {{ form_widget(form.phone) }}
+            </div>
+            {{ form_errors(form.phone) }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+            <button type="submit" class="btn btn-warning"> Редагувати </button>
+        </div>
+    </div>
     {{ form_end(form) }}
 
-    <br>
-    {% if phone is defined %}
-        {{ phone }}
-    {% endif %}
 {% endblock body %}
 
 {% block javascripts %}

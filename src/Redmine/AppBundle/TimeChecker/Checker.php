@@ -257,7 +257,7 @@ class Checker implements WorkerInterface
         $clientSMS = new SMSClient($this->alfa_sms_ID, $this->alfa_sms_password, $this->alfa_sms_api_key);
 
         try {
-            $clientSMS->sendSMS($this->alfa_sms_name, $user->getSettings()->getPhone(), $message);
+            $clientSMS->sendSMS($this->alfa_sms_name, '+38'.$user->getSettings()->getPhone(), $message);
         } catch (\Exception $e) {}
     }
 }

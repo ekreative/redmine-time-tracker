@@ -50,6 +50,7 @@ class Settings
 
     /**
      * @Assert\Length(max=20, maxMessage="Не більше {{ limit }} символів")
+     * @Assert\Regex(pattern="/^[+]?[0-9+() -]+$/", message="Допустимі тільки цифри")
      * @ORM\Column(name="phone", type="string", length=21, nullable=true)
      */
     protected $phone;

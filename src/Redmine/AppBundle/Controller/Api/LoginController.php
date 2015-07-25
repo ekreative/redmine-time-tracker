@@ -9,6 +9,7 @@ use Redmine\AppBundle\Entity\DTO\ApiUserLogin;
 use Redmine\AppBundle\Entity\RedmineUser;
 use Redmine\AppBundle\Entity\Settings;
 use Redmine\AppBundle\Form\LoginApiType;
+use Redmine\AppBundle\Form\SettingsType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -46,7 +47,7 @@ class LoginController extends JsonController
                 $user
                     ->setUsername($q->user->login)
                     ->setEmail($q->user->mail)
-                    ->setPassword($passwordEncoder->encodePassword($user, "redmine"))
+                    ->setPassword($passwordEncoder->encodePassword($user, md5(uniqid())))
                     ->setName($q->user->firstname)
                     ->setSurname($q->user->lastname)
                     ->setRedmineUserID($q->user->id)
@@ -76,11 +77,32 @@ class LoginController extends JsonController
     }
 
     /**
-     * @Route("/get/user")
-     * @Method("GET")
+     * @Route("/user/settings", name="api_settings_update")
+     * @Method("POST")
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function getUserAction()
+    public function getUserAction(Request $request)
     {
-        return new JsonResponse($this->getUser());
+        /** @var RedmineUser $user */
+        $user = $this->getUser();
+
+        $settings = $user->getSettings();
+        $form = $this->createForm(new SettingsType(), $settings);
+
+        if ($request->getMethod() == "POST") {
+            $this->handleJsonForm($form, $request);
+            if ($form->isValid()) {
+                /** @var EntityManager $em */
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
+
+//                $this->get('redmine.timeChecker')->start($user);
+
+                return new JsonResponse($this->getUser());
+            }
+        }
+
+        return new JsonResponse(['message' => 'Something wrong'], 400);
     }
 }

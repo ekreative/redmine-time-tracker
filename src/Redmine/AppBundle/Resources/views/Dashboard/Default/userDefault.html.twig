@@ -1,5 +1,9 @@
 {% extends "::base.html.twig" %}
 
 {% block body %}
-    {{ q }}
+    <br>
+    <div class="well well-sm">
+        <span>Today ( {{ date }} ) you track </span>
+        <span style="font-weight: bolder;">{{ hours }}</span> hours.
+    </div>
 {% endblock body %}

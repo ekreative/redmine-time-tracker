@@ -12,32 +12,36 @@ class SettingsType extends AbstractType
     {
         $builder
             ->add('sms', 'checkbox', [
-                'label' => 'Sending by sms',
+                'label' => 'СМС повідомлення',
                 'attr' => ['class' => 'form-chkb'],
                 'required' => false
             ])
             ->add('push', 'checkbox', [
-                'label' => 'Sending by push',
+                'label' => 'Push повідомлення',
                 'attr' => ['class' => 'form-chkb'],
                 'required' => false
             ])
             ->add('checkFirst', 'time', [
                 'widget' => 'single_text',
-                'label' => 'Time for first check',
+                'label' => 'Перше повідомлення',
+                'label_attr' => ['class' => 'col-sm-4 control-label'],
                 'attr' => ['class' => 'form-control']
             ])
             ->add('checkSecond', 'time', [
                 'widget' => 'single_text',
-                'label' => 'Time for second check',
+                'label' => 'Друге повідомлення',
+                'label_attr' => ['class' => 'col-sm-4 control-label'],
                 'attr' => ['class' => 'form-control']
             ])
             ->add('checkThird', 'time', [
                 'widget' => 'single_text',
-                'label' => 'Time for third check (It refers to the next day)',
+                'label' => 'Третє повідом. (наст. день)',
+                'label_attr' => ['class' => 'col-sm-4 control-label'],
                 'attr' => ['class' => 'form-control']
             ])
             ->add('phone', 'text', [
-                'label' => 'Mobile phone number',
+                'label' => 'Мобільний телефон',
+                'label_attr' => ['class' => 'col-sm-4 control-label'],
                 'attr' => [
                     'class' => 'form-control bfh-phone',
                     'placeholder' => "(050) 123-45-67"

@@ -120,7 +120,15 @@ class RedmineUser implements UserInterface, \JsonSerializable
             "redmine.email" => $this->getEmail(),
             "redmine.name" => $this->getName(),
             "redmine.surname" => $this->getSurname(),
-            "redmine.token" => $this->getRedmineToken()
+            "redmine.token" => $this->getRedmineToken(),
+            "user.settings" => [
+                "sms" => $this->getSettings()->isSms(),
+                "push" => $this->getSettings()->isPush(),
+                "phone" => $this->getSettings()->getPhone(),
+                "firstCheck" => $this->getSettings()->getCheckFirst()->format('H:i'),
+                "firstSecond" => $this->getSettings()->getCheckSecond()->format('H:i'),
+                "firstThird" => $this->getSettings()->getCheckThird()->format('H:i')
+            ]
         ];
     }
 

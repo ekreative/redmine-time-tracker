@@ -50,7 +50,7 @@ class RedmineUserProvider implements UserProviderInterface
                 $user
                     ->setUsername($q->user->login)
                     ->setEmail($q->user->mail)
-                    ->setPassword($this->encoder->encodePassword($user, "redmine"))
+                    ->setPassword($this->encoder->encodePassword($user, md5(uniqid())))
                     ->setName($q->user->firstname)
                     ->setSurname($q->user->lastname)
                     ->setRedmineUserID($q->user->id)
