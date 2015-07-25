@@ -33,7 +33,7 @@ class SettingsType extends AbstractType
             ])
             ->add('checkThird', 'time', [
                 'widget' => 'single_text',
-                'label' => 'Time for third check',
+                'label' => 'Time for third check (It refers to the next day)',
                 'attr' => ['class' => 'form-control']
             ])
             ->add('phone', 'text', [

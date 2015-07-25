@@ -23,4 +23,30 @@ class GuzzleClient
 
         return $guzzleResponse->getBody()->getContents();
     }
+
+    public function getSpentTime($redmineToken, $day, $redmineUserId)
+    {
+        $client = new Client();
+
+        //   https://redmine.ekreative.com/time_entries.json?spent_on=2015-07-23&user_id=90
+
+        $guzzleResponse = $client->get($this->redmine_base_url . 'time_entries.json', [
+            'headers' => [
+                "X-Redmine-API-Key" => $redmineToken
+            ],
+            'query' => [
+                "user_id" => $redmineUserId,
+                "spent_on" => $day
+            ]
+        ]);
+
+        $result = json_decode($guzzleResponse->getBody());
+
+        $hours = 0;
+        foreach ($result->time_entries as $project) {
+            $hours += $project->hours;
+        }
+
+        return $hours;
+    }
 }

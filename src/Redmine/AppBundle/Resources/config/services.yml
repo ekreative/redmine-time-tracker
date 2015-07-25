@@ -22,3 +22,16 @@ services:
     redmine.device.notification:
         class: Redmine\AppBundle\Notification\DeviceAndPushNotification
         arguments: [ @logger, @mcfedr_aws_push.messages, @mcfedr_aws_push.devices, @doctrine.orm.entity_manager, @mcfedr_aws_push.sns_client ]
+
+    redmine.timeChecker:
+        class: Redmine\AppBundle\TimeChecker\Checker
+        arguments:
+            - @doctrine.orm.entity_manager
+            - @mcfedr_resque.manager
+            - %queue_name%
+            - @mcfedr_aws_push.messages
+            - @redmine.guzzle_client
+            - %alfa_sms_name%
+            - %alfa_sms_ID%
+            - %alfa_sms_password%
+            - %alfa_sms_api_key%
