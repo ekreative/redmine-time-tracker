@@ -97,18 +97,18 @@ status 403. (error validation)
 ## User object example:
 ```json
 {
-  "redmine.username": "yuriy.tarnavskiy",
-  "redmine.email": "yuriy.tarnavskiy@ekreative.com",
-  "redmine.name": "Yuriy",
-  "redmine.surname": "Tarnavskiy",
-  "redmine.token": " token ",
-  "user.settings": {
-    "sms": true,
-    "push": false,
-    "phone": "0501234567",
-    "firstCheck": "18:00",
-    "firstSecond": "20:10",
-    "firstThird": "09:47"
-  }
+    "redmine.username": "yuriy.tarnavskiy",
+    "redmine.email": "yuriy.tarnavskiy@ekreative.com",
+    "redmine.name": "Yuriy",
+    "redmine.surname": "Tarnavskiy",
+    "redmine.token": " token ",
+    "user.settings": {
+        "sms": true,
+        "push": false,
+        "checkFirst": "18:00",
+        "checkSecond": "20:10",
+        "checkThird": "09:47",
+        "phone": "0501234567"
+    }
 }
 ```

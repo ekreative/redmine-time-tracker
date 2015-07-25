@@ -124,10 +124,10 @@ class RedmineUser implements UserInterface, \JsonSerializable
             "user.settings" => [
                 "sms" => $this->getSettings()->isSms(),
                 "push" => $this->getSettings()->isPush(),
-                "phone" => $this->getSettings()->getPhone(),
-                "firstCheck" => $this->getSettings()->getCheckFirst()->format('H:i'),
-                "firstSecond" => $this->getSettings()->getCheckSecond()->format('H:i'),
-                "firstThird" => $this->getSettings()->getCheckThird()->format('H:i')
+                "checkFirst" => $this->getSettings()->getCheckFirst()->format('H:i'),
+                "checkSecond" => $this->getSettings()->getCheckSecond()->format('H:i'),
+                "checkThird" => $this->getSettings()->getCheckThird()->format('H:i'),
+                "phone" => $this->getSettings()->getPhone()
             ]
         ];
     }
