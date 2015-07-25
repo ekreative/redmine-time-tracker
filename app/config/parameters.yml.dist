@@ -25,7 +25,7 @@ parameters:
     aws_ios_sb_arn: aws_arn_ios_sb
     aws_android_arn: aws_arn_android
     queue_name: redmine_tracker
-    alfa_sms_name: 'CTO service'
+    alfa_sms_name: 'Redmine'
     alfa_sms_ID: "tel"
     alfa_sms_password: "pas"
     alfa_sms_api_key: "api_id"
