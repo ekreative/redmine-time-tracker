@@ -1,9 +1,48 @@
 {% extends "::base.html.twig" %}
 
 {% block body %}
-    <br>
-    <div class="well well-sm">
-        <span>Today ( {{ date }} ) you track </span>
-        <span style="font-weight: bolder;">{{ hours }}</span> hours.
+
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12">
+            <h3 class="text-center">Information for {{ date }}:</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Project name
+                        </th>
+                        <th>
+                            Spend time (hours)
+                        </th>
+                        <th>
+                            Comments
+                        </th>
+                    </tr>
+                </thead>
+                <tfoot style="border-top: 2px gray solid;">
+                    <tr>
+                        <td>Total spend hours:</td>
+                        <td><b>{{ hours }}</b></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    {% for project in info %}
+                        <tr>
+                            <td>
+                                {{ project.name }}
+                            </td>
+                            <td>
+                                {{ project.hours }}
+                            </td>
+                            <td>
+                                {{ project.comment }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
+
 {% endblock body %}

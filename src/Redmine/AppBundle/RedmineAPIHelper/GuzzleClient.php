@@ -49,4 +49,34 @@ class GuzzleClient
 
         return $hours;
     }
+
+    public function getInformationForTodayTrackedProject($redmineToken, $day, $redmineUserId)
+    {
+        $client = new Client();
+
+        $guzzleResponse = $client->get($this->redmine_base_url . 'time_entries.json', [
+            'headers' => [
+                "X-Redmine-API-Key" => $redmineToken
+            ],
+            'query' => [
+                "user_id" => $redmineUserId,
+                "spent_on" => $day
+            ]
+        ]);
+
+        $redmineResponse = json_decode($guzzleResponse->getBody());
+
+        $result = [];
+        $hours = 0;
+        foreach ($redmineResponse->time_entries as $project) {
+            $hours += $project->hours;
+            $result[] = [
+                'name' => $project->project->name,
+                'hours' => $project->hours,
+                'comment' => $project->comments ? $project->comments : ''
+            ];
+        }
+
+        return ['info' => $result, 'totalHours' => $hours];
+    }
 }

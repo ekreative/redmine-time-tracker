@@ -3,6 +3,11 @@ redmine_tracker
 
 A Symfony project created on June 27, 2015, 10:33 am.
 
+## Configuration
+
+For starting resque run __VVERBOSE=1 QUEUE=redmine_tracker ./bin/resque__
+
+For starting scheduler run __VVERBOSE=1 ./bin/resque-scheduler__
 
 # API documentation
 

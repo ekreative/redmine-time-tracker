@@ -20,11 +20,12 @@ class DefaultController extends Controller
         $user = $this->getUser();
         $date = Carbon::now()->format('Y-m-d');
 
-        $hours = $this->get('redmine.guzzle_client')->getSpentTime($user->getRedmineToken(), $date, $user->getRedmineUserID());
+        $trackedInformation = $this->get('redmine.guzzle_client')->getInformationForTodayTrackedProject($user->getRedmineToken(), $date, $user->getRedmineUserID());
 
         return [
-            'hours' => $hours,
-            'date' => $date
+            'date' => $date,
+            'hours' => $trackedInformation['totalHours'],
+            'info' => $trackedInformation['info']
         ];
     }
 }

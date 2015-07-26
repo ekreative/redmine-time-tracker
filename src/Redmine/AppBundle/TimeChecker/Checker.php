@@ -98,23 +98,19 @@ class Checker implements WorkerInterface
 
         if ($now->format('H:i') > $user->getSettings()->getCheckSecond()->format('H:i')) {
             $nextDate = $now->copy();
-            $nextDate->addDay();
-            $lastWorkDate = null;
-            if ($nextDate->dayOfWeek == Carbon::SATURDAY) {
-                $lastWorkDate = $nextDate->copy();
-                $nextDate->addDays(2);
+            $nextDate->startOfDay()->hour((int)$user->getSettings()->getCheckThird()->format('H'))->minute((int)$user->getSettings()->getCheckThird()->format('i'));
+
+            $lastWorkDate = Carbon::now();
+            $nowTmp = Carbon::now();
+            if ($nowTmp->dayOfWeek == Carbon::SATURDAY) {
                 $lastWorkDate->subDays(1);
-            } elseif ($nextDate->dayOfWeek == Carbon::SUNDAY) {
-                $lastWorkDate = $nextDate->copy();
-                $nextDate->addDays(1);
+            } elseif ($nowTmp->dayOfWeek == Carbon::SUNDAY) {
                 $lastWorkDate->subDays(2);
             }
 
-            $nextDate->startOfDay()->hour((int)$user->getSettings()->getCheckThird()->format('H'))->minute((int)$user->getSettings()->getCheckThird()->format('i'));
-
             $job = $this->resqueManager->put('redmine.timeChecker', [
                 'userId' => $user->getId(),
-                'date' => $lastWorkDate ? $lastWorkDate->format('Y-m-d') : $nextDate->format('Y-m-d'),
+                'date' => $lastWorkDate->format('Y-m-d'),
                 'checkNum' => 3
             ], $this->queueName, $nextDate);
             $user->setJobDescription($job);
@@ -152,9 +148,9 @@ class Checker implements WorkerInterface
         $spentHours = $this->client->getSpentTime($user->getRedmineToken(), $date, $user->getRedmineUserID());
 
         if ($spentHours == 0) {
-            $notificationMessage = "You need track your time!";
+            $notificationMessage = "On {$date} you don't track your time!";
         } else {
-            $notificationMessage = "You tracked only {$spentHours} hours.";
+            $notificationMessage = "On {$date} you tracked only {$spentHours} hours.";
         }
 
         if ($checkNum == 1) {
@@ -232,7 +228,6 @@ class Checker implements WorkerInterface
             $user->setJobDescription($job);
             $this->em->flush();
         }
-
     }
 
     private function sendPush(RedmineUser $user, $message)

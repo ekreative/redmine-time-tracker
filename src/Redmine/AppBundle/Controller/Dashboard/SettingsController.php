@@ -17,6 +17,8 @@ class SettingsController extends Controller
      * @Route("/settings", name="user_settings")
      * @Method({"GET", "POST"})
      * @Template()
+     * @param Request $request
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function settingsAction(Request $request)
     {

@@ -82,7 +82,7 @@ class LoginController extends JsonController
      * @param Request $request
      * @return JsonResponse
      */
-    public function getUserAction(Request $request)
+    public function settingsAction(Request $request)
     {
         /** @var RedmineUser $user */
         $user = $this->getUser();
