@@ -64,9 +64,8 @@ class Device implements \JsonSerializable
     function jsonSerialize()
     {
         return [
+            "id" => $this->getId(),
             "pushPlatform" => $this->getPlatform(),
-            "pushToken" => $this->getPushToken(),
-            "deviceId" => $this->getDeviceId(),
             "enabled" => $this->isEnabled()
         ];
     }

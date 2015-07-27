@@ -18,8 +18,14 @@ security:
 #            pattern: ^/api/user/(login|register|forgot)$
 #            security: false
 #            anonymous: true
+        api_device_remove:
+            pattern: ^/api/device/(\d+)
+            stateless: true
+            simple_preauth:
+                authenticator: redmine.api.security.apikeyauthenticator
+            anonymous: false
         api_login:
-            pattern: ^/api/login
+            pattern: ^/api/device
             security: false
             anonymous: true
         api_area:
