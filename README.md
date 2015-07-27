@@ -30,7 +30,7 @@ status 200.
 
 ```json
 {
-    "id" => 7,
+    "id": 7,
     "pushPlatform": "ios | ios_sb | android",
     "enabled": true
 }
