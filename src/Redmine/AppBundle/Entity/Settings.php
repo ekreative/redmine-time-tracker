@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table("settings")
  * @ORM\Entity(repositoryClass="Redmine\AppBundle\Entity\Repository\SettingsRepository")
  */
-class Settings
+class Settings implements \JsonSerializable
 {
     use CreateUpdateTrait;
 
@@ -54,6 +54,25 @@ class Settings
      * @ORM\Column(name="phone", type="string", length=21, nullable=true)
      */
     protected $phone;
+
+    /**
+     * (PHP 5 &gt;= 5.4.0)<br/>
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     */
+    function jsonSerialize()
+    {
+        return [
+            "sms"=> $this->isSms(),
+            "push"=> $this->isPush(),
+            "checkFirst"=> $this->getCheckFirst()->format("H:i"),
+            "checkSecond"=> $this->getCheckSecond()->format("H:i"),
+            "checkThird"=> $this->getCheckThird()->format("H:i"),
+            "phone"=> $this->getPhone()
+        ];
+    }
 
     /**
      * Set sms

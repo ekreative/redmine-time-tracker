@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table("devices")
  * @ORM\Entity(repositoryClass="Redmine\AppBundle\Entity\Repository\DeviceRepository")
  */
-class Device
+class Device implements \JsonSerializable
 {
     use CreateUpdateTrait;
 
@@ -53,6 +53,23 @@ class Device
      * @ORM\ManyToOne(targetEntity="Redmine\AppBundle\Entity\RedmineUser", inversedBy="devices")
      */
     protected $user;
+
+    /**
+     * (PHP 5 &gt;= 5.4.0)<br/>
+     * Specify data which should be serialized to JSON
+     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * which is a value of any type other than a resource.
+     */
+    function jsonSerialize()
+    {
+        return [
+            "pushPlatform" => $this->getPlatform(),
+            "pushToken" => $this->getPushToken(),
+            "deviceId" => $this->getDeviceId(),
+            "enabled" => $this->isEnabled()
+        ];
+    }
 
     /**
      * @return array

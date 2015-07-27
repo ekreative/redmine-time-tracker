@@ -11,11 +11,11 @@ For starting scheduler run __VVERBOSE=1 ./bin/resque-scheduler__
 
 # API documentation
 
-__login:__ POST /api/login
+__registration device:__ POST /api/device/registration
 
 ```json
 {
-    "user": {
+    "device": {
         "username": "redmine username",
         "password": "redmine password",
         "pushPlatform": "android|ios|ios_sb",
@@ -28,8 +28,49 @@ __login:__ POST /api/login
 
 status 200. 
 
-User object:
+```json
+{
+    "message" => "device added"
+}
+```
 
+status 403.
+
+```json
+{
+    "message": "Sorry, unrecognized username or password"
+}
+```
+
+---
+
+__unregistration device:__ POST /api/device/remove
+
+```json
+{
+    "device": {
+        "pushToken": "push token",
+        "deviceId": "device ID"
+    }
+}
+```
+*Response:* 
+
+status 200. 
+
+```json
+{
+    "message" => "removed"
+}
+```
+
+status 400.
+
+```json
+{
+    "message": "Something wrong"
+}
+```
 
 status 403.
 
@@ -61,8 +102,16 @@ __update settings:__ POST /api/user/settings
 
 status 200. 
 
-User object:
-
+```json
+{
+    "sms": true,
+    "push": false,
+    "checkFirst": "18:00",
+    "checkSecond": "20:10",
+    "checkThird": "09:47",
+    "phone": "05046412345"
+}
+```
 
 status 400.
 
@@ -94,26 +143,6 @@ status 403. (error validation)
                 }
             ]
         }
-    }
-}
-```
-
-
-## User object example:
-```json
-{
-    "redmine.username": "yuriy.tarnavskiy",
-    "redmine.email": "yuriy.tarnavskiy@ekreative.com",
-    "redmine.name": "Yuriy",
-    "redmine.surname": "Tarnavskiy",
-    "redmine.token": " token ",
-    "user.settings": {
-        "sms": true,
-        "push": false,
-        "checkFirst": "18:00",
-        "checkSecond": "20:10",
-        "checkThird": "09:47",
-        "phone": "0501234567"
     }
 }
 ```

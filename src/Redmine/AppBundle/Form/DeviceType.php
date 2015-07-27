@@ -4,17 +4,21 @@ namespace Redmine\AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
-class LoginApiType extends AbstractType
+class DeviceType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', 'text')
-            ->add('password', 'password')
-            ->add('pushPlatform', 'text')
-            ->add('pushToken', 'text')
-            ->add('deviceId', 'text')
+            ->add('pushToken', 'text', [
+                'constraints' => [
+                    new NotBlank(['message' => 'Push token is not blank'])
+                ]
+            ])
+            ->add('deviceId', 'text', [
+                new NotBlank(['message' => 'device Id is not blank'])
+            ])
         ;
     }
 

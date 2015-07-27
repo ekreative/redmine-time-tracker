@@ -6,8 +6,10 @@ use Carbon\Carbon;
 use Doctrine\ORM\EntityManager;
 use Mcfedr\JsonFormBundle\Controller\JsonController;
 use Redmine\AppBundle\Entity\DTO\ApiUserLogin;
+use Redmine\AppBundle\Entity\DTO\Device;
 use Redmine\AppBundle\Entity\RedmineUser;
 use Redmine\AppBundle\Entity\Settings;
+use Redmine\AppBundle\Form\DeviceType;
 use Redmine\AppBundle\Form\LoginApiType;
 use Redmine\AppBundle\Form\SettingsType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -18,7 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 class LoginController extends JsonController
 {
     /**
-     * @Route("/login", name="api_login")
+     * @Route("/device/registration", name="api_login")
      * @Method("POST")
      * @param Request $request
      * @return JsonResponse
@@ -73,7 +75,43 @@ class LoginController extends JsonController
 
         $this->get('redmine.device.notification')->getDevice($user, $userDTO->getDeviceId(), $userDTO->getPushToken(), $userDTO->getPushPlatform());
 
-        return new JsonResponse($user);
+        return new JsonResponse(['message' => 'device added']);
+    }
+
+    /**
+     * @Route("/device/remove", name="api_uregister_device")
+     * @Method("POST")
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function unRegisterDeviceAction(Request $request)
+    {
+        $deviceDTO = new Device();
+        $form = $this->createForm(new DeviceType(), $deviceDTO);
+
+        if ($request->getMethod() == "POST") {
+            $this->handleJsonForm($form, $request);
+            if ($form->isValid()) {
+
+                /** @var EntityManager $em */
+                $em = $this->getDoctrine()->getManager();
+                $device = $em->getRepository('RedmineAppBundle:Device')->findOneBy([
+                    'deviceId' => $deviceDTO->getDeviceId(),
+                    'pushToken' => $deviceDTO->getPushToken()
+                ]);
+
+                if ($device) {
+                    $em->remove($device);
+                    $em->flush();
+                }
+
+                $this->get('redmine.timeChecker')->stop($this->getUser());
+
+                return new JsonResponse(['message' => "removed"]);
+            }
+        }
+
+        return new JsonResponse(['message' => 'Something wrong'], 400);
     }
 
     /**
@@ -99,7 +137,7 @@ class LoginController extends JsonController
 
                 $this->get('redmine.timeChecker')->start($user);
 
-                return new JsonResponse($this->getUser());
+                return new JsonResponse($user->getSettings());
             }
         }
 
