@@ -30,7 +30,7 @@ status 200.
 
 ```json
 {
-    "message" => "device added"
+    "message": "device added"
 }
 ```
 
@@ -60,7 +60,7 @@ status 200.
 
 ```json
 {
-    "message" => "removed"
+    "message": "removed"
 }
 ```
 
