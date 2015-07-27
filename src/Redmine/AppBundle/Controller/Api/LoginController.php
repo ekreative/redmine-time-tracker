@@ -97,7 +97,7 @@ class LoginController extends JsonController
                 $em = $this->getDoctrine()->getManager();
                 $em->flush();
 
-//                $this->get('redmine.timeChecker')->start($user);
+                $this->get('redmine.timeChecker')->start($user);
 
                 return new JsonResponse($this->getUser());
             }

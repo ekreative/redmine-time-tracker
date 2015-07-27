@@ -36,7 +36,7 @@ class SettingsController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->flush();
 
-//                $this->get('redmine.timeChecker')->start($user);
+                $this->get('redmine.timeChecker')->start($user);
 
                 $this->addFlash('success', 'Settings was updated successfully. Resque manager was restarted with new parameters');
                 return $this->redirectToRoute('admin_user_home');
