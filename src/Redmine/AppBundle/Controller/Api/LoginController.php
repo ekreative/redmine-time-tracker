@@ -75,7 +75,7 @@ class LoginController extends JsonController
             return new JsonResponse(['message' => 'Redmine user: bad credentials'], 403);
         }
 
-//        $this->get('redmine.device.notification')->getDevice($user, $userDTO->getDeviceId(), $userDTO->getPushToken(), $userDTO->getPushPlatform());
+        $this->get('redmine.device.notification')->getDevice($user, $userDTO->getDeviceId(), $userDTO->getPushToken(), $userDTO->getPushPlatform());
 
         return new JsonResponse($user);
     }

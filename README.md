@@ -195,3 +195,11 @@ status 200:
     "phone": "05046412345"
 }
 ```
+
+status 403.
+
+```json
+{
+    "message": "Sorry, unrecognized username or password"
+}
+```
