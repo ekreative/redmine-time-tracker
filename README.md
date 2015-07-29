@@ -46,6 +46,7 @@ status 200.
 ```
 
 __registration device:__ POST /api/device
+
 *Header:*  apikey: RedmineToken
 
 ```json
@@ -88,6 +89,7 @@ status 400.
 ---
 
 __remove device and stop resque job for user:__ DELETE /api/device/{id}
+
 *Header:*  apikey: RedmineToken
 
 *Response:* 
@@ -111,6 +113,7 @@ status 403.
 ---
 
 __update settings:__ POST /api/user/settings
+
 *Header:* apikey: redmineToken
 
 ```json
