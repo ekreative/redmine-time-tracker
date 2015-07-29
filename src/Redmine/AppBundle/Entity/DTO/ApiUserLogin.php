@@ -1,6 +1,7 @@
 <?php
 
 namespace Redmine\AppBundle\Entity\DTO;
+
 use Symfony\Component\Validator\Constraints as Assert;
 
 class ApiUserLogin

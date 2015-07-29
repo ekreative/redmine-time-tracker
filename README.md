@@ -11,13 +11,34 @@ For starting scheduler run __VVERBOSE=1 ./bin/resque-scheduler__
 
 # API documentation
 
+__login via redmine and register device:__ POST /api/login
+```json
+{
+    "user": {
+        "username": "redmine username",
+        "password": "redmine password",
+        "pushPlatform": "android|ios|ios_sb",
+        "pushToken": "push token",
+        "deviceId": "device ID"
+    }
+}
+```
+*Response:* 
+
+status 200. 
+
+```json
+{
+    user
+}
+```
+
 __registration device:__ POST /api/device
+*Header:*  apikey: RedmineToken
 
 ```json
 {
     "device": {
-        "username": "redmine username",
-        "password": "redmine password",
         "pushPlatform": "android|ios|ios_sb",
         "pushToken": "push token",
         "deviceId": "device ID"
@@ -44,10 +65,17 @@ status 403.
 }
 ```
 
+status 400.
+
+```json
+{
+    "message": "Wrong request"
+}
+```
+
 ---
 
 __remove device and stop resque job for user:__ DELETE /api/device/{id}
-
 *Header:*  apikey: RedmineToken
 
 *Response:* 
@@ -71,7 +99,6 @@ status 403.
 ---
 
 __update settings:__ POST /api/user/settings
-
 *Header:* apikey: redmineToken
 
 ```json

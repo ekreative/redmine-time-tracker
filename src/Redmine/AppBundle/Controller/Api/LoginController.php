@@ -7,9 +7,11 @@ use Doctrine\ORM\EntityManager;
 use Mcfedr\JsonFormBundle\Controller\JsonController;
 use Redmine\AppBundle\Entity\Device;
 use Redmine\AppBundle\Entity\DTO\ApiUserLogin;
+use Redmine\AppBundle\Entity\DTO\RegistrationDevice;
 use Redmine\AppBundle\Entity\RedmineUser;
 use Redmine\AppBundle\Entity\Settings;
 use Redmine\AppBundle\Form\LoginApiType;
+use Redmine\AppBundle\Form\RegistrationDeviceType;
 use Redmine\AppBundle\Form\SettingsType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -20,7 +22,7 @@ use Symfony\Component\HttpFoundation\Request;
 class LoginController extends JsonController
 {
     /**
-     * @Route("/device", name="api_login")
+     * @Route("/login", name="api_login")
      * @Method("POST")
      * @param Request $request
      * @return JsonResponse
@@ -75,16 +77,37 @@ class LoginController extends JsonController
 
         $this->get('redmine.device.notification')->getDevice($user, $userDTO->getDeviceId(), $userDTO->getPushToken(), $userDTO->getPushPlatform());
 
-        $device = $em->getRepository('RedmineAppBundle:Device')->findOneBy([
-            'deviceId' => $userDTO->getDeviceId(),
-            'pushToken' => $userDTO->getPushToken()
-        ]);
-
-        return new JsonResponse($device);
+        return new JsonResponse($user);
     }
 
     /**
-     * @Route("/device/{id}", name="api_uregister_device")
+     * @Route("/device", name="api_register_device")
+     * @Method("POST")
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function registerDeviceAction(Request $request)
+    {
+        $deviceDto = new RegistrationDevice();
+        $form = $this->createForm(new RegistrationDeviceType(), $deviceDto);
+
+        if ($request->getMethod() == Request::METHOD_POST) {
+            $this->handleJsonForm($form, $request);
+            if ($form->isValid()) {
+
+                /** @var RedmineUser $user */
+                $user = $this->getUser();
+                $device = $this->get('redmine.device.notification')->getDevice($user, $deviceDto->getDeviceId(), $deviceDto->getPushToken(), $deviceDto->getPushPlatform());
+
+                return new JsonResponse($device);
+            }
+        }
+
+        return new JsonResponse(['message' => 'Wrong request'], 400);
+    }
+
+    /**
+     * @Route("/device/{id}", name="api_unregister_device")
      * @Method("DELETE")
      * @ParamConverter("device", class="RedmineAppBundle:Device")
      * @param Device $device
@@ -116,7 +139,7 @@ class LoginController extends JsonController
         $settings = $user->getSettings();
         $form = $this->createForm(new SettingsType(), $settings);
 
-        if ($request->getMethod() == "POST") {
+        if ($request->getMethod() == Request::METHOD_POST) {
             $this->handleJsonForm($form, $request);
             if ($form->isValid()) {
                 /** @var EntityManager $em */
