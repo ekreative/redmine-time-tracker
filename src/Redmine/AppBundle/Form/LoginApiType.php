@@ -25,6 +25,6 @@ class LoginApiType extends AbstractType
      */
     public function getName()
     {
-        return "device";
+        return "user";
     }
 }

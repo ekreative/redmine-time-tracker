@@ -29,7 +29,19 @@ status 200.
 
 ```json
 {
-    user
+  "redmine.username": "yuriy.tarnavskiy",
+  "redmine.email": "yuriy.tarnavskiy@ekreative.com",
+  "redmine.name": "Yuriy",
+  "redmine.surname": "Tarnavskiy",
+  "redmine.token": "redmine token",
+  "user.settings": {
+    "sms": true,
+    "push": false,
+    "checkFirst": "17:45",
+    "checkSecond": "20:00",
+    "checkThird": "09:30",
+    "phone": 05012345678
+  }
 }
 ```
 
