@@ -146,7 +146,11 @@ class LoginController extends JsonController
                 $em = $this->getDoctrine()->getManager();
                 $em->flush();
 
-                $this->get('redmine.timeChecker')->start($user);
+                if ($settings->isSms() or $settings->isPush()) {
+                    $this->get('redmine.timeChecker')->start($user);
+                } else {
+                    $this->get('redmine.timeChecker')->stop($user);
+                }
 
                 return new JsonResponse($user->getSettings());
             }
