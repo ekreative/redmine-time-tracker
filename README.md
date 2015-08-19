@@ -3,7 +3,16 @@ redmine_tracker
 
 A Symfony project created on June 27, 2015, 10:33 am.
 
-## Configuration
+## Install
+
+    1. clone project
+    2. composer install
+    3. npm-install
+    4. gulp
+    5. clear cache for prod environment
+    6. start resque  
+
+## Resque
 
 For starting resque run __VVERBOSE=1 QUEUE=redmine_tracker ./bin/resque__
 
