@@ -1,0 +1,112 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12">
+
+        {{ form_start(form, {'attr': {'class': 'form-inline'} }) }}
+        <div class="form-group">
+            {{ form_label(form.filterDate) }}
+            <div style="margin-left: 7px; display: inline-block;">
+                {{ form_widget(form.filterDate) }}
+                {{ form_errors(form.filterDate) }}
+            </div>
+        </div>
+        <button type="submit" class="btn btn-sm btn-success" style="padding-left: 7px;">Показати</button>
+        {{ form_end(form) }}
+
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12">
+        <h3 class="text-center">Звіт</h3>
+        {% set totalSumm = 0 %}
+        <table class="table">
+            <tbody>
+                {% for item in result %}
+                    <tr style="border-top: 2px solid lightgray;">
+                        <td
+                            {% if item.time.totalHours >= 7 %}
+                                class="bg-success"
+                            {% elseif item.time.totalHours >= 3 and item.time.totalHours < 7 %}
+                                class="bg-warning"
+                            {% else %}
+                                class="bg-danger"
+                            {% endif %}
+                        >
+                            <a data-toggle="collapse" href="#item{{ loop.index }}" >{{ item.user }} - {{ item.time.totalHours }} годин</a>
+                        </td>
+                    </tr>
+                    {% if item.time.info | length > 0 %}
+                        <tr>
+                            <td style="padding: 0;">
+                                <div class="collapse" id="item{{ loop.index }}">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th width="35%">
+                                                Проект
+                                            </th>
+                                            <th width="15%">
+                                                Витрачено годин
+                                            </th>
+                                            <th width="50%">
+                                                Коментарі
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for project in item.time.info %}
+                                            <tr>
+                                                <td>
+                                                    {{ project.name }}
+                                                </td>
+                                                <td>
+                                                    {{ project.hours }}
+                                                </td>
+                                                <td>
+                                                    {{ project.comment }}
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% set totalSumm = totalSumm + item.time.totalHours %}
+                {% endfor %}
+                <tr style="border-top: 2px gray solid;">
+                    <td>
+                        <span style="font-weight: bolder;">Всього:</span> {{ totalSumm }} годин
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+{% endblock %}
+{% block javascripts %}
+    <script>
+        jQuery(function ($) {
+
+            $('.date-picker-tt').datepicker({
+                format: "dd.mm.yyyy",
+                orientation: "top left",
+//            todayBtn: "linked",
+                todayBtn: true,
+                clearBtn: true,
+                language: "uk",
+                calendarWeeks: true,
+                autoclose: true,
+                todayHighlight: true
+            });
+
+        });
+    </script>
+{% endblock javascripts %}

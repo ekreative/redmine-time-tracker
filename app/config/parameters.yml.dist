@@ -29,3 +29,4 @@ parameters:
     alfa_sms_ID: "tel"
     alfa_sms_password: "pas"
     alfa_sms_api_key: "api_id"
+    admin_users: [1]
