@@ -76,6 +76,7 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $users = $em->getRepository("RedmineAppBundle:RedmineUser")->findBy([], ['name' => 'ASC']);
         $redmineClient = $this->get('redmine.guzzle_client');
+        $smsBalance = $this->get('redmine.timechecker')->getBalance();
 
         $result = [];
         /** @var RedmineUser $user */
@@ -93,6 +94,7 @@ class DefaultController extends Controller
 
         return [
             "form" => $form->createView(),
+            "smsBalance" => $smsBalance,
             "result" => $result
         ];
     }

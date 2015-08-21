@@ -14,6 +14,17 @@
             </div>
         </div>
         <button type="submit" class="btn btn-sm btn-success" style="padding-left: 7px;">Показати</button>
+
+        <div class="pull-right" style="padding-top: 8px;">
+            <span>
+                <span style="font-weight: bolder;">СМС баланс:</span> {{ smsBalance | number_format(2, '.', ',') }} грн.
+                (Можна відправити приблизно:
+                    <span style="font-weight: bolder;">
+                        {{ (smsBalance / 0.2) | round(0, 'floor') }}
+                    </span>
+                    повідомлень)
+            </span>
+        </div>
         {{ form_end(form) }}
 
     </div>
