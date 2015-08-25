@@ -73,7 +73,7 @@ gulp.task('clean', function () {
 });
 
 gulp.task('default', ['clean'], function () {
-    var tasks = ['vendors-css', 'custom-css', 'vendors-js', 'custom-js', 'fonts', 'images'];
+    var tasks = ['vendors-css', 'custom-css',  'vendors-js', 'custom-js', 'fonts', 'images'];
 
     tasks.forEach(function (val) {
         gulp.start(val);
