@@ -12,35 +12,29 @@ class SettingsType extends AbstractType
     {
         $builder
             ->add('sms', 'checkbox', [
-                'label' => 'СМС повідомлення',
                 'attr' => ['class' => 'form-chkb'],
                 'required' => false
             ])
             ->add('push', 'checkbox', [
-                'label' => 'Push повідомлення',
                 'attr' => ['class' => 'form-chkb'],
                 'required' => false
             ])
             ->add('checkFirst', 'time', [
                 'widget' => 'single_text',
-                'label' => 'Перше повідомлення',
                 'label_attr' => ['class' => 'col-sm-4 control-label'],
                 'attr' => ['class' => 'form-control']
             ])
             ->add('checkSecond', 'time', [
                 'widget' => 'single_text',
-                'label' => 'Друге повідомлення',
                 'label_attr' => ['class' => 'col-sm-4 control-label'],
                 'attr' => ['class' => 'form-control']
             ])
             ->add('checkThird', 'time', [
                 'widget' => 'single_text',
-                'label' => 'Третє повідом. (наст. день)',
                 'label_attr' => ['class' => 'col-sm-4 control-label'],
                 'attr' => ['class' => 'form-control']
             ])
             ->add('phone', 'text', [
-                'label' => 'Мобільний телефон',
                 'label_attr' => ['class' => 'col-sm-4 control-label'],
                 'attr' => [
                     'class' => 'form-control bfh-phone',

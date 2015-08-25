@@ -9,7 +9,7 @@
             <div class="checkbox">
                 <label>
                     {{ form_widget(form.sms) }}
-                    {{ form_label(form.sms) }}
+                    {{ form_label(form.sms, 'SMS notification') }}
                     {{ form_errors(form.sms) }}
                 </label>
             </div>
@@ -21,7 +21,7 @@
             <div class="checkbox">
                 <label>
                     {{ form_widget(form.push) }}
-                    {{ form_label(form.push) }}
+                    {{ form_label(form.push, 'Push notification') }}
                     {{ form_errors(form.push) }}
                 </label>
             </div>
@@ -29,28 +29,28 @@
     </div>
 
     <div class="form-group">
-        {{ form_label(form.checkFirst) }}
+        {{ form_label(form.checkFirst, 'First reminder') }}
         <div class="col-sm-8 error-handling">
             {{ form_widget(form.checkFirst) }}
             {{ form_errors(form.checkFirst) }}
         </div>
     </div>
     <div class="form-group">
-        {{ form_label(form.checkSecond) }}
+        {{ form_label(form.checkSecond, 'Second reminder') }}
         <div class="col-sm-8 error-handling">
             {{ form_widget(form.checkSecond) }}
             {{ form_errors(form.checkSecond) }}
         </div>
     </div>
     <div class="form-group">
-        {{ form_label(form.checkThird) }}
+        {{ form_label(form.checkThird, 'Third reminder (next day)') }}
         <div class="col-sm-8 error-handling">
             {{ form_widget(form.checkThird) }}
             {{ form_errors(form.checkThird) }}
         </div>
     </div>
     <div class="form-group">
-        {{ form_label(form.phone) }}
+        {{ form_label(form.phone, 'Mobile number') }}
         <div class="col-sm-8 error-handling">
             <div class="input-group">
                 <div class="input-group-addon">+ 38</div>
@@ -62,17 +62,9 @@
 
     <div class="form-group">
         <div class="col-sm-offset-4 col-sm-8">
-            <button type="submit" class="btn btn-warning"> Редагувати </button>
+            <button type="submit" class="btn btn-warning"> Edit </button>
         </div>
     </div>
     {{ form_end(form) }}
 
 {% endblock body %}
-
-{% block javascripts %}
-    <script>
-        jQuery(function ($) {
-//           $('.bfh-phone').bfh();
-        });
-    </script>
-{% endblock javascripts %}

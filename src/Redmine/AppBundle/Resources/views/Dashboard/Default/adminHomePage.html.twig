@@ -13,16 +13,16 @@
                 {{ form_errors(form.filterDate) }}
             </div>
         </div>
-        <button type="submit" class="btn btn-sm btn-success" style="padding-left: 7px;">Показати</button>
+        <button type="submit" class="btn btn-sm btn-success" style="padding-left: 7px;">Show</button>
 
         <div class="pull-right" style="padding-top: 8px;">
             <span>
-                <span style="font-weight: bolder;">СМС баланс:</span> {{ smsBalance | number_format(2, '.', ',') }} грн.
-                (Можна відправити приблизно:
+                <span style="font-weight: bolder;">SMS balance:</span> {{ smsBalance | number_format(2, '.', ',') }} hrn.
+                (You can send approximately:
                     <span style="font-weight: bolder;">
                         {{ (smsBalance / 0.2) | round(0, 'floor') }}
                     </span>
-                    повідомлень)
+                    messages)
             </span>
         </div>
         {{ form_end(form) }}
@@ -32,7 +32,7 @@
 <div class="clearfix"></div>
 <div class="row">
     <div class="col-md-12 col-lg-12 col-sm-12">
-        <h3 class="text-center">Звіт</h3>
+        <h3 class="text-center">Report</h3>
         {% set totalSumm = 0 %}
         <table class="table">
             <tbody>
@@ -47,7 +47,7 @@
                                 class="bg-danger"
                             {% endif %}
                         >
-                            <a data-toggle="collapse" href="#item{{ loop.index }}" >{{ item.user }} - {{ item.time.totalHours }} годин</a>
+                            <a data-toggle="collapse" href="#item{{ loop.index }}" >{{ item.user }} - {{ item.time.totalHours }} hours</a>
                         </td>
                     </tr>
                     {% if item.time.info | length > 0 %}
@@ -58,13 +58,13 @@
                                         <thead>
                                         <tr>
                                             <th width="35%">
-                                                Проект
+                                                Project
                                             </th>
                                             <th width="15%">
-                                                Витрачено годин
+                                                Time spent
                                             </th>
                                             <th width="50%">
-                                                Коментарі
+                                                Comments
                                             </th>
                                         </tr>
                                         </thead>
@@ -92,7 +92,7 @@
                 {% endfor %}
                 <tr style="border-top: 2px gray solid;">
                     <td>
-                        <span style="font-weight: bolder;">Всього:</span> {{ totalSumm }} годин
+                        <span style="font-weight: bolder;">Total time spent:</span> {{ totalSumm }}
                     </td>
                 </tr>
             </tbody>
@@ -112,7 +112,6 @@
 //            todayBtn: "linked",
                 todayBtn: true,
                 clearBtn: true,
-                language: "uk",
                 calendarWeeks: true,
                 autoclose: true,
                 todayHighlight: true

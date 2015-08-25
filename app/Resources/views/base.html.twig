@@ -22,27 +22,9 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="{{ path('admin_user_home') }}">Redmine tracker</a>
-                    {#<a class="navbar-brand" href="{{ path('admin_apps_list') }}">Redmine tracker</a>#}
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        {#<li class="{{ app.request.attributes.get('_route') == 'admin_apps_list' ? 'active'}}">#}
-                            {#<a href="{{path('admin_apps_list')}}"><i class="fa fa-tasks"></i>&nbsp;Apps</a>#}
-                        {#</li>#}
-                        {#<li class="{{ app.request.attributes.get('_route') == 'admin_appUsers_list' ? 'active'}}">#}
-                            {#<a href="{{path('admin_appUsers_list')}}"><i class="fa fa-users"></i>&nbsp;Users</a>#}
-                        {#</li>#}
-                        {#<li class="{{ app.request.attributes.get('_route') == 'admin_profession' ? 'active'}}">#}
-                        {#<a href="{{path('admin_profession')}}">Skills</a>#}
-                        {#</li>#}
-                        {#<li class="{{ app.request.attributes.get('_route') == 'admin_job' ? 'active'}}">#}
-                        {#<a href="{{path('admin_job')}}" >Jobs</a>#}
-                        {#</li>#}
-                        {#<li class="{{ app.request.attributes.get('_route') == 'admin_map' ? 'active'}}">#}
-                        {#<a href="{{path('admin_map')}}">Map</a>#}
-                        {#</li>#}
-                    </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ app.user.name }} {{ app.user.surname }}&nbsp;&nbsp;<span class="caret"></span>&nbsp;&nbsp;</a>
@@ -52,7 +34,7 @@
                                 </li>
                                 <li role="separator" class="divider"></li>
                                 <li>
-                                    <a href="{{path('logout')}}"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;Вихід</a>
+                                    <a href="{{path('logout')}}"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;Exit</a>
                                 </li>
                             </ul>
                         </li>
@@ -64,12 +46,6 @@
 {% endblock menu %}
 
 <div class="container">
-
-    {#<div class="row">#}
-        {#<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">#}
-            {#{% block breadcrumbs %}{% endblock breadcrumbs %}#}
-        {#</div>#}
-    {#</div>#}
 
     {% for flashType in app.session.flashbag.keys %}
         {% for flash in app.session.flashbag.get(flashType) %}
@@ -85,7 +61,6 @@
 </div>
 
 <script src="{{ asset('js/vendors.min.js') }}"></script>
-{#<script src="{{ asset('js/custom.min.js') }}"></script>#}
 {% block javascripts %}{% endblock javascripts %}
 </body>
 </html>
